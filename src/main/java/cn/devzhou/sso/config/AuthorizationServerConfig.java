@@ -34,13 +34,17 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
         clients.inMemory()
                 .withClient("api1").secret("123")
                 .redirectUris("http://localhost:9001/callback")
-                .authorizedGrantTypes("authorization_code")
+                .authorizedGrantTypes("authorization_code","refresh_token")
                 .scopes("read_userinfo", "read_contacts")
+                .resourceIds("oauth2-resource")
+                .accessTokenValiditySeconds(1200)
+                .refreshTokenValiditySeconds(50000)
                 .and()
                 .withClient("clientapp").secret("112233")
                 .redirectUris("http://localhost:9001/callback")
                 .authorizedGrantTypes("implicit")
                 .scopes("read_userinfo", "read_contacts");
+
     }
 
 }
